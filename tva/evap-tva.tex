@@ -11,6 +11,7 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage[hidelinks]{hyperref}
+\usepackage{import}
 
 \usepackage{tikz}
 \usetikzlibrary{positioning,fit,calc,arrows,arrows.meta,automata,shapes}
@@ -30,7 +31,7 @@
 	
 	\clearpage
 	
-	\input{introduction}
+	\subimport{}{introduction}
 
-	\input{milestone1/milestone1}
+	\subimport{milestone1/}{milestone1}
 \end{document}
