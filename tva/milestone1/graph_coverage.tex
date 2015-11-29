@@ -1,6 +1,8 @@
 \usetikzlibrary{arrows,automata}
 
 \subsection{Graph Coverage}
+\begin{figure}
+\centering
 
 \begin{tikzpicture}[node distance=2cm, dummy/.style={circle,fill=blue!20,draw}]
 
@@ -101,3 +103,5 @@
 (24) edge [->, bend left] node {} (21)
 (25) edge [->, bend left] node {} (6);
 \end{tikzpicture}
+\caption{Control Flow Graph of the Function \texttt{send\_publish\_notifications} in \url{evap/evaluation/tools.py}}
+\end{figure}
