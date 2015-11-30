@@ -6,12 +6,20 @@
 
 \begin{tikzpicture}[node distance=2cm, dummy/.style={circle,fill=blue!20,draw}]
 
-% grade_document_courses = grade_document_courses or []
+
 \node[initial,state] (1) {1};
+% grade_document_courses = grade_document_courses or []
+\node[state] (27) [below left of=1] {27};% grade_document_courses = grade_document_courses or []
+\node[state] (28) [below right of=1] {28};
+
+\node[state] (2) [below right of=27] {2};
 % evaluation_results_courses = evaluation_results_courses or []
-\node[state] (2) [below of=1] {2};
+\node[state] (29) [below left of=2] {29};
+% evaluation_results_courses = evaluation_results_courses or []
+\node[state] (30) [below right of=2] {30};
+
 % publish_notifications = defaultdict(lambda: CourseLists(set(), set()))
-\node[state] (3) [below of=2] {3};
+\node[state] (3) [below right of=29] {3};
 % for course in evaluation_results_courses:
 \node[state, dummy] (4) [below of=3] {$4_\text{for}$};
 % if course.can_publish_grades:
@@ -65,8 +73,10 @@
 
 
 \path[]
-(1) edge [->] node {} (2)
-(2) edge [->] node {} (3)
+(1) edge [->] node {} (27)
+(1) edge [->] node {\texttt{or []}} (28)
+(2) edge [->] node {} (29)
+(2) edge [->] node {\texttt{or []}} (30)
 (3) edge [->] node {} (4)
 (4) edge [->] node {} (5)
 (4) edge [->] node {} (7)
@@ -101,7 +111,11 @@
 (22) edge [->] node {} (23)
 (23) edge [->, bend left] node {} (21)
 (24) edge [->, bend left] node {} (21)
-(25) edge [->, bend left] node {} (6);
+(25) edge [->, bend left] node {} (6)
+(27) edge [->] node {} (2)
+(28) edge [->] node {} (2)
+(29) edge [->] node {} (3)
+(30) edge [->] node {} (3);
 \end{tikzpicture}
 \caption{Control Flow Graph of the Function \texttt{send\_publish\_notifications} in \url{evap/evaluation/tools.py}}
 \end{figure}
