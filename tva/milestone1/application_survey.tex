@@ -34,12 +34,30 @@ As expected of an open source project managed by students there is no formal spe
 Though there are different information gathered in a wiki hosted on Github. (Link: \url{https://github.com/fsr-itse/EvaP/wiki})
 The responsibility to specify new features is on the main developer, Johannes Wolf.
 He collaborates directly with the users of the feature. 
-Another feature of Github is used to track bugs: the label \emph{[T] Bug} for \emph{issues}.
 
 
 \paragraph{Current testing status / Bug repositories}
+The project is hosted open source on GitHub.
+Different tools allow to include badges on the overview page to display the status of the latest build \ref{fig:testing-tools}.
+The following tools are already used:
+\begin{itemize}
+    \item \emph{Travis CI}: 
+    A continuous integration service to build and test projects hosted on GitHub
+    \item \emph{Gemnasium}:
+     An automated service for monitoring project dependencies for possible updates
+     \item \emph{Landscape}:
+     A service checking the code for errors, code smells and deviations from stylistic conventions
+     \item  \emph{COVERALLS}:
+     A service relying on Travis CI that tracks the code coverage
+\end{itemize}
+Another feature of Github is used to track bugs: the label \emph{[T] Bug} for \emph{issues}.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth, keepaspectratio]{graphics/testing-tools-github}
+    \caption{Badges of testing tools on the GitHub overview page (01.12.2015)}
+    \label{fig:testing-tools}
+\end{figure}
 
-GitHub, TravisCI, gemnasium, landscape
 
 \paragraph{Personal involvement}
 Our first contact with EvaP was as users. 
