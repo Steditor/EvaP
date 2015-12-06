@@ -1,0 +1,19 @@
+Mapping image vs. gui
+
+new - new
+pending for lecturer approval - prepared
+approved by lecturer - lecturer approved
+approved by fsr - approved
+in evaluation - in evaluation
+comment review pending - evaluated
+publication pending - reviewed
+published - published
+
+MISSING:
+- State Deleted
+- Arrow from pending for lecturer approval to new
+- Arrow from approved by lecturer to pending for lecturer approval
+- approved by fsr -> in evaluation is triggered automatically by date, not by the user
+- same from in evaluation -> comment review pending
+- Arrow from publication pending to comment review pending (triggered by resetting the approval state of one comment)
+- Maybe missing: states for adding grade documents
