@@ -16,6 +16,35 @@
 \usepackage{tikz}
 \usetikzlibrary{positioning,fit,calc,arrows,arrows.meta,automata,shapes}
 
+\usepackage{listings}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+\definecolor{codeBkgnd}{rgb}{0.95,0.95,0.95}
+\definecolor{codeFrame}{rgb}{0.8,0.8,0.8}
+
+\lstset{
+    language=Python,
+    basicstyle=\footnotesize\ttfamily,
+    otherkeywords={self},             % Add keywords here
+    keywordstyle=\color{deepblue},
+    emph={MyClass,__init__},          % Custom highlighting
+    emphstyle=\color{deepred},    % Custom highlighting style
+    stringstyle=\color{deepgreen},
+    frame=tb,                         % Any extra options here
+    backgroundcolor=\color{codeBkgnd},
+    numbers=left,
+    numberstyle=\tiny,
+    captionpos=b,
+    frame=single,
+    framesep=6pt,
+    xleftmargin=23pt,
+    xrightmargin=7pt,
+    framexleftmargin=16pt,
+    abovecaptionskip=\medskipamount,
+    showstringspaces=false 
+}
+
 % Other commands
 \newcommand{\term}{\textit}
 
