@@ -39,12 +39,23 @@ Considering the following test approaches we came to the conlusion described bel
 In conclusion, we will use tests to find unnoticed defects and we will apply different testing techniques on units or components of EvaP. These testing approaches align with our goals to help EvaP's developers and to learn about different testing techniques.
 
 \paragraph{Available Artifacts}
+The most thorough artifact, the GitHub wiki, offers two artifacts with potential regarding coverage-based testing:
+\begin{itemize}
+    \item A finite state machine describing the states of courses in the evaluation process (\url{https://github.com/fsr-itse/EvaP/wiki/Evaluation-States})
+    \item Description of a few use cases with UML use case diagrams (\url{https://github.com/fsr-itse/EvaP/wiki/Use-Cases})
+\end{itemize}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth, keepaspectratio]{graphics/original_states_of_a_course}
+    \caption{Original FSM: Possible states of a course}
+    \label{fig:original-states}
+\end{figure}
 
 \paragraph{Initial Test Plan}
+Based on our findings, the initial test plan is as follows:
 \begin{itemize}
-    \item Control flow graph of a function
-    \item Use-Case of the latest feature
-    \item FMS of evaluation states
+    \item Create a control flow graph of a function, apply coverage criteria to define test sets and implement tests
+    \item Check and if necessary update the FMS of evaluation states
+    \item Use or create a UML use case diagram including its elaboration to develop an activity diagram
     \item Investigate coverage found by the tool COVERALLS
-    \item Add at least one unit test based on our findings
 \end{itemize}
