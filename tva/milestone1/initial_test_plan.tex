@@ -24,14 +24,19 @@ We started with evaluating EvaP regarding the five basic verification and valida
 \end{enumerate}
 
 \paragraph{Test Classifications and Approaches}
+Considering the following test approaches we came to the conlusion described below:
 \begin{enumerate}
     \item Validation vs. Defect Testing
     
+    Since there is no requirements document or even a list of features, it is hard to implement validation testing. As we will not draw up a corresponding document, we will not apply validation testing. However, if possible, we will try to detect defects in the software by finding inputs leading to incorrect behaviour. Thus, we will apply defect testing.
     \item Development, Release, User Testing 
     
+    Because of the applied continuous integration process: Development testing is already in use. Release testing and acceptance is not possible; there are no specified releases. User testing is applied in a way as most users familiar with the developer report encountered bugs directly.
     \item Unit/Component, Integration, System Testing
+    
+    EvaP is a web application, so there are no hardware components directly involved. While there are software dependencies, this aspect is already covered by the tool Gemnasium. For a web application it would be important to work in the most popular web browsers (desktop and mobile). Since there are no complaints known about EvaP not working in a web browser and no plans exist about developments that would use different web browser features, we will not focus on integration testing. Similar to validation testing, without a specified requirements we can not execute system testing. Instead we will focus on unit and component testing. 
 \end{enumerate}
-
+In conclusion, we will use tests to find unnoticed defects and we will apply different testing techniques on units or components of EvaP. These testing approaches align with our goals to help EvaP's developers and to learn about different testing techniques.
 
 \paragraph{Available Artifacts}
 
