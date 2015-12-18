@@ -17,3 +17,5 @@ MISSING:
 - same from in evaluation -> comment review pending
 - Arrow from publication pending to comment review pending (triggered by resetting the approval state of one comment)
 - Maybe missing: states for adding grade documents
+
+Transitions are defined in evaluation/models.py:277ff
