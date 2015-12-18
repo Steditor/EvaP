@@ -19,44 +19,55 @@
 \node[state] (3) [below left of=30] {3};
 % for course in evaluation_results_courses:
 \node[state, dummy] (4) [below of=3] {$4_\text{for}$};
-% if course.can_publish_grades:
-\node[state] (7) [below of=4] {$7_\text{if}$};
-% elif len(course.textanswer_set) > 0:
-\node[state] (11) [left of=7] {$11_\text{elif}$};
 
-\node[state, dummy] (16) [below left of=11] {$16_\text{for}$};
+% else empty
+\node[state] (12) [below left of=4] {$12_\text{else}$};
+
+% elif len(course.textanswer_set) > 0:
+\node[state] (11) [left of=12] {$11_\text{elif}$};
+% if course.can_publish_grades:
+\node[state] (7) [left of=11] {$7_\text{if}$};
+
+\node[state, dummy] (16) [below of=11] {$16_\text{for}$};
+
+% else empty
+\node[state] (19) [below of=16] {$19_\text{else}$};
 % if textanswer.contribution.contributor:
-\node[state] (17) [below of=16] {$17_\text{if}$};
+\node[state] (17) [left of=19] {$17_\text{if}$};
 %publish_notifications[textanswer.contribution.contributor].evaluation_results_courses.add(course)
 \node[state] (18) [below of=17] {18};
-% else empty
-\node[state] (19) [left of=17] {$19_\text{else}$};
-%publish_notifications[course.responsible_contributor].evaluation_results_courses.add(course)
-\node[state] (20) [right of=17] {20};
-% else empty
-\node[state] (12) [left of=11] {$12_\text{else}$};
+
+
 % for participant in course.participants.all():
-\node[state, dummy] (8) [below right of=7] {$8_\text{for}$};
+\node[state, dummy] (8) [below left of=7] {$8_\text{for}$};
 % publish_notifications[participant].evaluation_results_courses.add(course)
-\node[state] (9) [below left of=8] {9};
+\node[state] (9) [below of=8] {9};
 % for contribution in course.contributions.all():
-\node[state, dummy] (10) [below right of=8] {$10_\text{for}$};
+\node[state, dummy] (10) [left of=9] {$10_\text{for}$};
+
+
+% else empty
+\node[state] (14) [below of=10] {$14_\text{else}$};
 % if contribution.contributor:
-\node[state] (13) [below of=10] {$13_\text{if}$};
+\node[state] (13) [left of=14] {$13_\text{if}$};
 % publish_notifications[contribution.contributor].evaluation_results_courses.add(course)
 \node[state] (15) [below of=13] {15};
-% else empty
-\node[state] (14) [left of=13] {$14_\text{else}$};
+
 % dummy for course in grade_document_courses:
 \node[state, dummy] (5) [right=6cm of 7] {$5_\text{for}$};
 % dummy for participant in course.participants.all():
 \node[state, dummy] (21) [below of=5] {$21_\text{for}$};
+
+% else
+\node[state] (24) [below of=21] {$24_\text{else}$};
 % if participant.can_download_grades:
-\node[state] (22) [below of=21] {$22_\text{if}$};
+\node[state] (22) [left of=24] {$22_\text{if}$};
 % publish_notifications[participant].grade_document_courses.add(course)
 \node[state] (23) [below of=22] {23};
-% else
-\node[state] (24) [left of=22] {$24_\text{else}$};
+
+%publish_notifications[course.responsible_contributor].evaluation_results_courses.add(course)
+\node[state] (20) at ($(19)!0.5!(22)$) {20};
+
 % for user, course_lists in publish_notifications.items()
 \node[state, dummy] (6) [right of=21] {$6_\text{for}$};
 % EmailTemplate.send_publish_notifications_to_user(
@@ -74,37 +85,37 @@
 (2) edge [->] node {} (29)
 (3) edge [->] node {} (4)
 (4) edge [->] node {} (5)
-(4) edge [->] node {} (7)
-(7) edge [->] node {} (11)
-(11) edge [->] node {} (12)
+(4) edge [->, bend right=15] node {} (7)
 (5) edge [->] node {} (6)
 (5) edge [->] node {} (21)
 (6) edge [->] node {} (25)
 (6) edge [->] node {} (26)
 (7) edge [->] node {} (8)
+(7) edge [->] node {} (11)
 (8) edge [->] node {} (9)
 (8) edge [->] node {} (10)
 (9) edge [->, bend left] node {} (8)
-(10) edge [->] node {} (4)
+(10) edge [->, bend left=45] node {} (4)
 (10) edge [->] node {} (13)
-(13) edge [->] node {} (14)
+(11) edge [->] node {} (12)
 (11) edge [->] node {} (16)
-(12) edge [->, bend left] node {} (4)
+(12) edge [->] node {} (4)
+(13) edge [->] node {} (14)
 (13) edge [->] node {} (15)
 (14) edge [->, bend left] node {} (10)
-(15) edge [->, bend right] node {} (10)
+(15) edge [->, bend right=75] node {} (10)
 (16) edge [->] node {} (17)
-(17) edge [->] node {} (19)
-(16) edge [->] node {} (20)
+(16) edge [->, bend left] node {} (20)
 (17) edge [->] node {} (18)
-(18) edge [->, bend right] node {} (16)
+(17) edge [->] node {} (19)
+(18) edge [->, bend right=75] node {} (16)
 (19) edge [->, bend left] node {} (16)
 (20) edge [->] node {} (4)
 (21) edge [->, bend left] node {} (5)
 (21) edge [->] node {} (22)
 (22) edge [->] node {} (24)
 (22) edge [->] node {} (23)
-(23) edge [->, bend right] node {} (21)
+(23) edge [->, bend right=75] node {} (21)
 (24) edge [->, bend left] node {} (21)
 (25) edge [->, bend left] node {} (6)
 (27) edge [->] node {} (2)
