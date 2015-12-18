@@ -1,125 +1,32 @@
 \usetikzlibrary{arrows,automata}
 
 \subsubsection{Selected Control Flow Graph}
+We chose the function, because %TODO  
 
+During our research we found two promising tools for control flow graph creation. 
+The first tool is hosted open source on GitHub (\url{https://github.com/danielrandall/python-control-flow-graph}). 
+Unfortunately, it is not documented and its execution lead to errors. 
+After a few tries, we estimated that fixing the tool would take more time than creating the control flow graph by hand.
+The second tool found was even more promising as it was a report of a master graduate from the university of Texas titled: 
+``Control flow graph visualisation and its application to coverage and fault localization in Python''
+by Jackson Lee Salling.
+His tool even visualized edge-pair and prime path coverage in control flow graphs.
+But unfortunately he did not respond to our request if we could use the tool for our project or if he had tips for published tools.
+
+
+Therefore, we created the control flow graph by hand. We experienced some difficulties with Python's code style:
+\begin{itemize}
+    \item \texttt{def send\_publish\_notifications(
+        grade\_document\_courses=None, 
+        evaluation\_results\_courses=None):}
+    
+    
+    \item \texttt{grade\_document\_courses = grade\_document\_courses or []}
+    
+    This assignment of either the \texttt{grade\_document\_courses} or an empty list is dependent on the evaluation of \texttt{grade\_document\_courses}. Here are several statements hidden in one line.
+    \item 
+\end{itemize}
 \lstinputlisting[language=Python, breaklines, columns=flexible, float, floatplacement=t, label=lst:send_publish_notifications, caption=The control flow graph is based on this function.]{code/send_publish_notifications.py}
 
 
-\begin{figure}
-\centering
-
-\begin{tikzpicture}[node distance=2cm, dummy/.style={circle,fill=blue!20,draw}]
-
-
-\node[initial,state] (1) {1};
-% grade_document_courses = grade_document_courses or []
-\node[state] (27) [below left of=1] {27};% grade_document_courses = grade_document_courses or []
-\node[state] (28) [below right of=1] {28};
-
-\node[state] (2) [below right of=27] {2};
-% evaluation_results_courses = evaluation_results_courses or []
-\node[state] (29) [below left of=2] {29};
-% evaluation_results_courses = evaluation_results_courses or []
-\node[state] (30) [below right of=2] {30};
-
-% publish_notifications = defaultdict(lambda: CourseLists(set(), set()))
-\node[state] (3) [below right of=29] {3};
-% for course in evaluation_results_courses:
-\node[state, dummy] (4) [below of=3] {$4_\text{for}$};
-% if course.can_publish_grades:
-\node[state] (7) [below of=4] {$7_\text{if}$};
-% elif len(course.textanswer_set) > 0:
-\node[state] (11) [left of=7] {$11_\text{elif}$};
-
-\node[state, dummy] (16) [below left of=11] {$16_\text{for}$};
-% if textanswer.contribution.contributor:
-\node[state] (17) [below of=16] {$17_\text{if}$};
-%publish_notifications[textanswer.contribution.contributor].evaluation_results_courses.add(course)
-\node[state] (18) [below of=17] {18};
-% else empty
-\node[state] (19) [left of=17] {$19_\text{else}$};
-%publish_notifications[course.responsible_contributor].evaluation_results_courses.add(course)
-\node[state] (20) [right of=17] {20};
-% else empty
-\node[state] (12) [left of=11] {$12_\text{else}$};
-% for participant in course.participants.all():
-\node[state, dummy] (8) [below right of=7] {$8_\text{for}$};
-% publish_notifications[participant].evaluation_results_courses.add(course)
-\node[state] (9) [below left of=8] {9};
-% for contribution in course.contributions.all():
-\node[state, dummy] (10) [below right of=8] {$10_\text{for}$};
-% if contribution.contributor:
-\node[state] (13) [below of=10] {$13_\text{if}$};
-% publish_notifications[contribution.contributor].evaluation_results_courses.add(course)
-\node[state] (15) [below of=13] {15};
-% else empty
-\node[state] (14) [left of=13] {$14_\text{else}$};
-% dummy for course in grade_document_courses:
-\node[state, dummy] (5) [right=6cm of 7] {$5_\text{for}$};
-% dummy for participant in course.participants.all():
-\node[state, dummy] (21) [below of=5] {$21_\text{for}$};
-% if participant.can_download_grades:
-\node[state] (22) [below of=21] {$22_\text{if}$};
-% publish_notifications[participant].grade_document_courses.add(course)
-\node[state] (23) [below of=22] {23};
-% else
-\node[state] (24) [left of=22] {$24_\text{else}$};
-% for user, course_lists in publish_notifications.items()
-\node[state, dummy] (6) [right of=21] {$6_\text{for}$};
-% EmailTemplate.send_publish_notifications_to_user(
-% user,
-% grade_document_courses=list(course_lists.grade_document_courses),
-% evaluation_results_courses=list(course_lists.evaluation_results_courses)
-% )
-\node[state] (25) [below of=6] {25};
-% end
-\node[accepting, state] (26) [right of=25] {26};
-
-
-\path[]
-(1) edge [->] node {} (27)
-(1) edge [->] node {\texttt{or []}} (28)
-(2) edge [->] node {} (29)
-(2) edge [->] node {\texttt{or []}} (30)
-(3) edge [->] node {} (4)
-(4) edge [->] node {} (5)
-(4) edge [->] node {} (7)
-(4) edge [->] node {} (11)
-(4) edge [->] node {} (12)
-(5) edge [->] node {} (6)
-(5) edge [->] node {} (21)
-(6) edge [->] node {} (25)
-(6) edge [->] node {} (26)
-(7) edge [->] node {} (8)
-(8) edge [->] node {} (9)
-(8) edge [->] node {} (10)
-(9) edge [->, bend left] node {} (8)
-(10) edge [->] node {} (4)
-(10) edge [->] node {} (13)
-(10) edge [->] node {} (14)
-(11) edge [->] node {} (16)
-(12) edge [->, bend left] node {} (4)
-(13) edge [->] node {} (15)
-(14) edge [->, bend left] node {} (10)
-(15) edge [->, bend left] node {} (10)
-(16) edge [->] node {} (17)
-(16) edge [->] node {} (19)
-(16) edge [->] node {} (20)
-(17) edge [->] node {} (18)
-(18) edge [->, bend left] node {} (16)
-(19) edge [->, bend left] node {} (16)
-(20) edge [->] node {} (4)
-(21) edge [->, bend left] node {} (5)
-(21) edge [->] node {} (22)
-(21) edge [->] node {} (24)
-(22) edge [->] node {} (23)
-(23) edge [->, bend left] node {} (21)
-(24) edge [->, bend left] node {} (21)
-(25) edge [->, bend left] node {} (6)
-(27) edge [->] node {} (2)
-(28) edge [->] node {} (2)
-(29) edge [->] node {} (3)
-(30) edge [->] node {} (3);
-\end{tikzpicture}
-\caption{Control Flow Graph of the Function \texttt{send\_publish\_notifications} in \url{evap/evaluation/tools.py}}
-\end{figure}
+\include{tikz_control_flow_graph}
