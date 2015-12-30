@@ -3,126 +3,126 @@
 
 \resizebox{\linewidth}{!}{
 \begin{tikzpicture}[node distance=2cm, dummy/.style={circle,fill=blue!20,draw}]
-\node[initial,state] (1) {1};
+\node[initial,state] (l1) {1};
 % grade_document_courses = grade_document_courses or []
-\node[state] (27) [below of=1] {27};% grade_document_courses = grade_document_courses or []
-\node[state] (28) [below right of=27] {28};
+\node[state] (l2a) [below of=l1] {2};
+\node[state] (l2b) [below right of=l2a] {$2_\text{or}$};
+\node[state] (l2) [below left of=l2b] {$2_\text{=}$};
 
-\node[state] (2) [below left of=28] {2};
 % evaluation_results_courses = evaluation_results_courses or []
-\node[state] (29) [below of=2] {29};
-% evaluation_results_courses = evaluation_results_courses or []
-\node[state] (30) [below right of=29] {30};
+\node[state] (l3a) [below of=l2] {3};
+\node[state] (l3b) [below right of=l3a] {$3_\text{or}$};
+\node[state] (l3) [below left of=l3b] {$3_\text{=}$};
 
 % publish_notifications = defaultdict(lambda: CourseLists(set(), set()))
-\node[state] (3) [below left of=30] {3};
+\node[state] (l5) [below of=l3] {5};
+
 % for course in evaluation_results_courses:
-\node[state, dummy] (4) [below of=3] {$4_\text{for}$};
+\node[state, dummy] (l7) [below of=l5] {$7_\text{for}$};
 
-% else empty
-\node[state] (12) [below left of=4] {$12_\text{else}$};
-
+% implicit else
+\node[state] (l9-16-e) [below left of=l7] {$16_\text{else}$};
 % elif len(course.textanswer_set) > 0:
-\node[state] (11) [left of=12] {$11_\text{elif}$};
+\node[state] (l16) [left of=l9-16-e] {$16_\text{elif}$};
 % if course.can_publish_grades:
-\node[state] (7) [left of=11] {$7_\text{if}$};
-
-\node[state, dummy] (16) [below of=11] {$16_\text{for}$};
-
-% else empty
-\node[state] (19) [below of=16] {$19_\text{else}$};
-% if textanswer.contribution.contributor:
-\node[state] (17) [left of=19] {$17_\text{if}$};
-%publish_notifications[textanswer.contribution.contributor].evaluation_results_courses.add(course)
-\node[state] (18) [below of=17] {18};
-
+\node[state] (l9) [left of=l16] {$9_\text{if}$};
 
 % for participant in course.participants.all():
-\node[state, dummy] (8) [below left of=7] {$8_\text{for}$};
+\node[state, dummy] (l10) [below left of=l9] {$10_\text{for}$};
 % publish_notifications[participant].evaluation_results_courses.add(course)
-\node[state] (9) [below of=8] {9};
-% for contribution in course.contributions.all():
-\node[state, dummy] (10) [left of=9] {$10_\text{for}$};
+\node[state] (l11) [below of=l10] {11};
 
+% for contribution in course.contributions.all():
+\node[state, dummy] (l12) [left of=l11] {$12_\text{for}$};
 
 % else empty
-\node[state] (14) [below of=10] {$14_\text{else}$};
+\node[state] (l13-e) [below of=l12] {$13_\text{else}$};
 % if contribution.contributor:
-\node[state] (13) [left of=14] {$13_\text{if}$};
+\node[state] (l13) [left of=l13-e] {$13_\text{if}$};
 % publish_notifications[contribution.contributor].evaluation_results_courses.add(course)
-\node[state] (15) [below of=13] {15};
+\node[state] (l14) [below of=l13] {14};
+
+% for textanswer in course.textanswer_set:
+\node[state, dummy] (l17) [below of=l16] {$17_\text{for}$};
+% implicit else
+\node[state] (l18-e) [below of=l17] {$18_\text{else}$};
+% if textanswer.contribution.contributor:
+\node[state] (l18) [left of=l18-e] {$18_\text{if}$};
+%publish_notifications[textanswer.contribution.contributor].evaluation_results_courses.add(course)
+\node[state] (l19) [below of=l18] {19};
 
 % dummy for course in grade_document_courses:
-\node[state, dummy] (5) [right=6cm of 7] {$5_\text{for}$};
+\node[state, dummy] (l21) [right=6cm of l9] {$21_\text{for}$};
 % dummy for participant in course.participants.all():
-\node[state, dummy] (21) [below of=5] {$21_\text{for}$};
+\node[state, dummy] (l23) [below of=l21] {$23_\text{for}$};
 
 % else
-\node[state] (24) [below of=21] {$24_\text{else}$};
+\node[state] (l24-e) [below of=l23] {$24_\text{else}$};
 % if participant.can_download_grades:
-\node[state] (22) [left of=24] {$22_\text{if}$};
+\node[state] (l24) [left of=l24-e] {$24_\text{if}$};
 % publish_notifications[participant].grade_document_courses.add(course)
-\node[state] (23) [below of=22] {23};
+\node[state] (l25) [below of=l24] {25};
 
 %publish_notifications[course.responsible_contributor].evaluation_results_courses.add(course)
-\node[state] (20) at ($(19)!0.5!(22)$) {20};
+\node[state] (l20) at ($(l18-e)!0.5!(l24)$) {20};
 
 % for user, course_lists in publish_notifications.items()
-\node[state, dummy] (6) [right of=21] {$6_\text{for}$};
+\node[state, dummy] (l27) [right of=l23] {$27_\text{for}$};
 % EmailTemplate.send_publish_notifications_to_user(
 % user,
 % grade_document_courses=list(course_lists.grade_document_courses),
 % evaluation_results_courses=list(course_lists.evaluation_results_courses)
 % )
-\node[state] (25) [below of=6] {25};
+\node[state] (l28) [below of=l27] {28};
 % end
-\node[accepting, state] (26) [right of=25] {26};
+\node[accepting, state] (l33) [right of=l28] {33};
 
 
 \path[]
-(1) edge [->] node {} (27)
-(2) edge [->] node {} (29)
-(3) edge [->] node {} (4)
-(4) edge [->] node {} (5)
-(4) edge [->, bend right=15] node {} (7)
-(5) edge [->] node {} (6)
-(5) edge [->] node {} (21)
-(6) edge [->] node {} (25)
-(6) edge [->] node {} (26)
-(7) edge [->] node {} (8)
-(7) edge [->] node {} (11)
-(8) edge [->] node {} (9)
-(8) edge [->] node {} (10)
-(9) edge [->, bend left] node {} (8)
-(10) edge [->, bend left=45] node {} (4)
-(10) edge [->] node {} (13)
-(11) edge [->] node {} (12)
-(11) edge [->] node {} (16)
-(12) edge [->] node {} (4)
-(13) edge [->] node {} (14)
-(13) edge [->] node {} (15)
-(14) edge [->, bend left] node {} (10)
-(15) edge [->, bend right=75] node {} (10)
-(16) edge [->] node {} (17)
-(16) edge [->, bend left] node {} (20)
-(17) edge [->] node {} (18)
-(17) edge [->] node {} (19)
-(18) edge [->, bend right=75] node {} (16)
-(19) edge [->, bend left] node {} (16)
-(20) edge [->] node {} (4)
-(21) edge [->, bend left] node {} (5)
-(21) edge [->] node {} (22)
-(22) edge [->] node {} (24)
-(22) edge [->] node {} (23)
-(23) edge [->, bend right=75] node {} (21)
-(24) edge [->, bend left] node {} (21)
-(25) edge [->, bend left] node {} (6)
-(27) edge [->] node {} (2)
-(27) edge [->] node[right] {\texttt{grade\_document\_courses = None}} (28)
-(28) edge [->] node {} (2)
-(29) edge [->] node {} (3)
-(29) edge [->] node[right] {\texttt{evaluation\_results\_courses = None}} (30)
-(30) edge [->] node {} (3);
+(l1) edge [->] (l2a)
+(l2) edge [->] (l3a)
+(l3) edge [->] (l5)
+(l5) edge [->] (l7)
+(l7) edge [->] (l21)
+(l7) edge [->, bend right=15] (l9)
+(l21) edge [->] (l27)
+(l21) edge [->] (l23)
+(l27) edge [->] (l28)
+(l27) edge [->] (l33)
+(l9) edge [->] (l10)
+(l9) edge [->] (l16)
+(l10) edge [->, bend left] (l11)
+(l10) edge [->] (l12)
+(l11) edge [->, bend left] (l10)
+(l12) edge [->, bend left=45] (l7)
+(l12) edge [->] (l13)
+(l16) edge [->] (l9-16-e)
+(l16) edge [->] (l17)
+(l9-16-e) edge [->] (l7)
+(l13) edge [->] (l13-e)
+(l13) edge [->] (l14)
+(l13-e) edge [->, bend left] (l12)
+(l14) edge [->, bend right=75] (l12)
+(l17) edge [->] (l18)
+(l17) edge [->, bend left] (l20)
+(l18) edge [->] (l19)
+(l18) edge [->] (l18-e)
+(l19) edge [->, bend right=75] (l17)
+(l18-e) edge [->, bend left] (l17)
+(l20) edge [->] (l7)
+(l23) edge [->, bend left] (l21)
+(l23) edge [->] (l24)
+(l24) edge [->] (l24-e)
+(l24) edge [->] (l25)
+(l25) edge [->, bend right=75] (l23)
+(l24-e) edge [->, bend left] (l23)
+(l28) edge [->, bend left] (l27)
+(l2a) edge [->] (l2)
+(l2a) edge [->] node[right] {\texttt{grade\_document\_courses = None}} (l2b)
+(l2b) edge [->] (l2)
+(l3a) edge [->] (l3)
+(l3a) edge [->] node[right] {\texttt{evaluation\_results\_courses = None}} (l3b)
+(l3b) edge [->] (l3);
 \end{tikzpicture}}
 \caption{Control Flow Graph of the Function \texttt{send\_publish\_notifications} in \url{evap/evaluation/tools.py}}
 \end{figure}
