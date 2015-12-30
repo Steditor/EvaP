@@ -5,9 +5,16 @@ It includes the first steps taken to gather information, get comfortable with th
 Lastly, it includes the phase of testing the project regarding graph coverage.
 
 \subsection{Set Up}
-- set up of vagrant on windows does not work for submodules
-- unnoticed by developers because of different os
+Instead of running natively on the developer's machine, EvaP is wrapped in a Vagrant development environment%
+\footnote{\url{https://www.vagrantup.com/}}.
+This allows developers to develop features with their preferred tools on their favorite operating system out of Mac OS X, Windows, Debian and Centos, without having to go through the complicated process of collecting dependencies for their specific platform.
+The complete project set up normally consists of installing git, a virtual machine provider for Vagrant and Vagrant itself, cloning the repository and running the shell command \texttt{vagrant up}.
 
+As all core developers of EvaP use unix-based platforms, a bug in an external sub module used by EvaP remained unnoticed and undealt with:
+When we tried to set up the project on windows machines that use a line feed and a carriage return (\texttt{LF}~\texttt{CR}) to end lines in text files --- as opposed to unix systems that only use a single line feed (\texttt{LF}) --- the set up failed.
+The bug was fixed quickly: firstly only for EvaP, subsequently in the external module the line ending policy had to enforce \texttt{LF} only.
+
+Now, the set up therefore works on all major operating systems, allowing an easy start for all developers who want to contribute to EvaP, and more insights into the system for us.
 
 \subsection{First Steps}
 Incidentally, this is the first semester for the student representatives to host \emph{EvaP Hacking Hours} biweekly.

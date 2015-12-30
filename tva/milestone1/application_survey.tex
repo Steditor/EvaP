@@ -6,8 +6,8 @@ We interview them about information regarding the first steps of our project.
 \paragraph{Development Paradigm and Development Languages}
 There are no development paradigms explicitly determined.
 But as stated there is a main developer responsible for code review.
-As it is all newly developed code is reviewed before it is accepted.
-Everyone is able to review code and discuss it with the coder and other reviewers.
+As it is, all newly developed code is reviewed before it is accepted.
+Everyone is able to review code and discuss it with the author and other reviewers.
 This practice shall ensure readable code and distribute knowledge about code changes.
 Additionally, it is implicitely assumed that paradigms of the used development languages are followed.
 The development languages are:
@@ -17,29 +17,30 @@ The development languages are:
     \item Javascript
     \item CSS
 \end{itemize}
-As an example for paradigms given by the languages we checked the document known as \emph{PEP 0008}.
+As an example for paradigms given by the languages we checked the document known as \emph{PEP 0008}%
+\footnote{\url{https://www.python.org/dev/peps/pep-0008/}}.
 This is the style guide for Python code written by Guido van Rossum, the author of Python, and followed by most open source projects in Python.
-Link: \url{https://www.python.org/dev/peps/pep-0008/}
 
 \paragraph{Requirements / Specification / Documentation / Artefacts}
 Requirements were elaborated at the start of EvaP's predecessor EvaJ several years ago.
 No original artifacts were stored even though most requirements still hold. 
 Examples are:
 \begin{itemize}
-    \item Evaluation should be anonymously
-    \item Written feedback is only readable to a small, strongly specified selection of people
+    \item Evaluation should be anonymous
+    \item Written feedback is only readable by a small, strongly specified selection of people
     \item Written feedback is reviewed before it is available to the lecturer
 \end{itemize}
-As expected of an open source project managed by students there is no formal specification of EvaP. 
-Though there are different information gathered in a wiki hosted on Github. (Link: \url{https://github.com/fsr-itse/EvaP/wiki})
+Symptomatic for an open source project managed by students there is no formal specification of EvaP. 
+Though there are different information gathered in the project wiki hosted on Github%
+\footnote{\url{https://github.com/fsr-itse/EvaP/wiki}}.
 The responsibility to specify new features is on the main developer, Johannes Wolf.
-He collaborates directly with the users of the feature. 
+He collaborates directly with the users of the feature.
 %TODO EvaP FAQ
 
 
 \paragraph{Current testing status / Bug repositories}
 The project is hosted open source on GitHub.
-Different tools allow to include badges on the overview page to display the status of the latest build (Graphic \ref{fig:testing-tools}).
+Different tools allow to include badges on the overview page to display the status of the latest build (\autoref{fig:testing-tools}).
 The following tools are already used:
 \begin{itemize}
     %TODO Vagrant
@@ -49,7 +50,7 @@ The following tools are already used:
      An automated service for monitoring project dependencies for possible updates
      \item \emph{Landscape}:
      A service checking the code for errors, code smells and deviations from stylistic conventions
-     \item  \emph{COVERALLS}:
+     \item  \emph{Coveralls}:
      A service relying on Travis CI that tracks the code coverage
      \item 
      Another feature of Github is used to track bugs: the label \emph{[T] Bug} for \emph{issues}.
