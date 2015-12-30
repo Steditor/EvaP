@@ -18,7 +18,7 @@ By these means it is enforced, that all existing tests are run at least once bef
 \paragraph{PyCharm integration}
 For local development we decided to code and test with PyCharm, a professional IDE for python, that also claims to support Django and Vagrant out of the box.
 Since the recently published release of PyCharm version 5, this support almost covers all configuration issues of remote development.
-Whilst previous versions did not configure the ssh access to the virtual execution environment correctly, the developer now only has to run the automatic project configuration of PyCharm for Django Vagrant projects and then add a path mapping of the local source code to the path of the corresponding source files inside the virtual machine to be able to execute tests.
+Whilst previous versions did not configure the ssh access and path mapping to the virtual execution environment correctly, the developer now only has to run the automatic project configuration of PyCharm for Django Vagrant projects to be able to execute tests.
 The test integration then provides an intuitive graphical overview of the status of all test cases, and can even be configured to rerun automatically on code changes.
 However, as the execution of the whole test set currently takes a few minutes, it is not feasible to constantly run the whole test set during development.
 
@@ -29,6 +29,11 @@ This package records statement coverage and can be configured to measure branch 
 According to our research, there currently does not seem to be a tool that implements further coverage criteria such as logic coverage.
 To run the tests with coverage, one has to call the utility script with \texttt{coverage run}.
 From the collected coverage data one can generate a HTML report or convert the data in a xml-based format that can e.g. be read by PyCharm.
-In theory PyCharm integrates coverage collection, in combination with Vagrant there still seems to be a bug that always leads to a displayed coverage of 0\%.
-If one however imports a generated xml report, PyCharm enriches its editor by displaying the current line coverage along the source code.
+By now, PyCharm is also able to run tests with coverage and afterwards enriches its editor by displaying the current line coverage along the source code.
+In previous versions one had to import the generated xml manually to see correct results, due to an IDE bug that always displayed 0\% line coverage.
 EvaP uses an integration of the web service \textit{Coveralls} into the Travis build process that roughly provides the same view as PyCharm.
+Neither Coveralls, nor PyCharm display the collected branch coverage data at the moment.
+
+In summary the support of automated testing through the selected tools is very good for line- and branch coverage.
+During the work on milestone 1 we have witnessed major improvements in the IDE PyCharm concerning test execution and coverage data analysis.
+It is to expect, that even more improvements will follow within near future.
