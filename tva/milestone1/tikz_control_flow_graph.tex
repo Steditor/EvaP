@@ -1,9 +1,8 @@
 \begin{figure}
 \centering
 
+\resizebox{\linewidth}{!}{
 \begin{tikzpicture}[node distance=2cm, dummy/.style={circle,fill=blue!20,draw}]
-
-
 \node[initial,state] (1) {1};
 % grade_document_courses = grade_document_courses or []
 \node[state] (27) [below of=1] {27};% grade_document_courses = grade_document_courses or []
@@ -124,6 +123,6 @@
 (29) edge [->] node {} (3)
 (29) edge [->] node[right] {\texttt{evaluation\_results\_courses = None}} (30)
 (30) edge [->] node {} (3);
-\end{tikzpicture}
+\end{tikzpicture}}
 \caption{Control Flow Graph of the Function \texttt{send\_publish\_notifications} in \url{evap/evaluation/tools.py}}
 \end{figure}
