@@ -29,8 +29,6 @@ The last update was in 2008.
 It is written for Python 2.x and has never been ported to Python 3.x.
 Since the installation process requires Python 2.x while we work with Python 3.x in EvaP we will drop our investigation with this tool.
 
-\paragraph{Pyflakes}
-
 \paragraph{pep8}
 The Python style guide checker \emph{pep8} checks code against some of the style conventions in PEP 8.
 It differentiates between errors and warnings.
@@ -41,5 +39,10 @@ It differentiates between errors and warnings.
     \label{fig:pep8}
 \end{figure} 
 pep8 throws a few more errors about lines being too long, because the line length was set to 100 instead of 80 characters in Pylint.
+
+\paragraph{Pyflakes}
+Unlike Pylint and pep8 \emph{Pyflakes} does not check for violations of coding style but instead focuses on checking for errors.
+The tool is less intuitively to use as there is no report if no errors are found. 
+It did not report any errors for either \texttt{send\_publish\_notifications(..)} or \texttt{tools.py}
 
 \paragraph{Landscape}
