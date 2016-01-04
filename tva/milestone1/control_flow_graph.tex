@@ -28,5 +28,12 @@ Therefore, we created the control flow graph by hand. We experienced some diffic
 \end{itemize}
 \lstinputlisting[language=Python, breaklines, columns=flexible, float, floatplacement=t, label=lst:send_publish_notifications, caption=The control flow graph is based on this function.]{code/send_publish_notifications.py}
 
-
 \include{tikz_control_flow_graph}
+\begin{figure}[h!]
+\resizebox{\linewidth}{!}{	
+	\begin{tikzpicture}[node distance=2cm, dummy/.style={circle,fill=blue!20,draw}]
+	\pic {sendPublishNotifications={}};
+	\end{tikzpicture}
+}
+\caption{Control Flow Graph of the Function \texttt{send\_publish\_notifications} in \url{evap/evaluation/tools.py}}
+\end{figure}
