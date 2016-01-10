@@ -36,3 +36,97 @@ Here are several statements hidden in one line, disguised by a lazy evaluation o
 }
 \caption{Control Flow Graph of the Function \texttt{send\_publish\_notifications} in \url{evap/evaluation/tools.py}}
 \end{figure}
+
+As the chosen function takes two lists of courses with published results as input values, one can almost achieve Node and Edge Coverage with only one test case, that includes one course for each if/else-branch.
+Only the assignment of empty lists as default arguments would require a second test case.
+This clearly shows, that neither Node nor Edge Coverage alone is an appropriate coverage criteria to decide whether the function has been fully tested, as both test cases are highly unrealistic.
+Additionally, the complexity of the first test case would be comparable to the complexity of the tested function itself, which makes it just as likely that the test case contains faults as that failing tests flag a fault in the tested code.
+
+Edge Pair Coverage seems to be a much more useful criteria in this case, as it is able to describe whether loops have been executed or bypassed.
+For example, one would have to implement both a test case which enters the loop in node $7_{for}$ via the edge pair $(5,7_{for}), (7_{for},9_{if})$ and to bypass it using the edges $(5,7_{for}), (7_{for},21_{for})$.
+Edge Pair Coverage would also require a test set that executes the edge pair $(21_{for}, 23_{for}), (23_{for}, 21_{for})$ --- a path that would only be executed if the function processes a course without participants.
+This however is an impossible input, and even though the test case could still simulate this kind of input, it does not make much sense to test a setting that can not occur, as a course with results always needs to have at least one participant.
+
+Requesting the test set to achieve Complete Path Coverage is also not possible, as the function under test contains multiple loops.
+Therefore, Prime Path Coverage would be a possible criteria to test the function with each loop being bypassed, run once and run twice.
+However, the graph coverage tool provided by Ammann and Offutt%
+\footnote{\url{https://cs.gmu.edu:8443/offutt/coverage/GraphCoverage}}
+determines a total of 101 necessary test paths to cover all prime paths.
+Even if we would remove all infeasible test paths from that list, the number of test paths would still be over-the-top.
+
+Hence, we decided to go for Specified Path Coverage to cover typical usages of the function and also some special cases that could lead to unexpected behavior.
+This lead to a test set of six test cases, that achieve both Node and Edge Coverage.
+
+\begin{figure}
+	\resizebox{0.3\linewidth}{!}{	
+		\begin{tikzpicture}[node distance=2cm, dummy/.style={circle,fill=blue!20,draw}]
+		\pic {sendPublishNotifications={}};
+		
+		\path[draw=green, opacity=0.6, line width=4mm]
+		(l1) -- (l2a) -- (l2b) -- (l2) -- (l3a) -- (l3b) -- (l3) -- (l5) -- (l7) -- (l21) -- (l27) -- (l33);
+		\end{tikzpicture}
+	}
+	\resizebox{0.3\linewidth}{!}{	
+		\begin{tikzpicture}[node distance=2cm, dummy/.style={circle,fill=blue!20,draw}]
+		\pic {sendPublishNotifications={}};
+		
+		\path[draw=green, opacity=0.6, line width=4mm]
+		(l1) -- (l2a) -- (l2b) -- (l2) -- (l3a) -- (l3) -- (l5) -- (l7) edge [bend right=15] (l9) 
+		(l9) -- (l10) edge [bend right] (l11)
+		(l11) edge [bend right] (l10)
+		(l10) -- (l12) -- (l13) -- (l13-e) edge [bend left] (l12)
+		(l12) -- (l13) -- (l14) edge [bend right=75] (l12)
+		(l12) edge [bend left=45] (l7)
+		(l7) -- (l21) -- (l27) -- (l28) edge [bend left] (l27)
+		(l27) -- (l33);
+		\end{tikzpicture}
+	}
+	\resizebox{0.3\linewidth}{!}{	
+		\begin{tikzpicture}[node distance=2cm, dummy/.style={circle,fill=blue!20,draw}]
+		\pic {sendPublishNotifications={}};
+		
+		\path[draw=green, opacity=0.6, line width=4mm]
+		(l1) -- (l2a) -- (l2b) -- (l2) -- (l3a) -- (l3) -- (l5) -- (l7) edge [bend right=15] (l9) 
+		(l9) -- (l16) -- (l17) -- (l18) -- (l18-e) edge [bend left] (l17)
+		(l17) -- (l18) -- (l19) edge [bend right=75] (l17)
+		(l17) edge [bend left] (l20)
+		(l20) -- (l7)
+		(l7) -- (l21) -- (l27) -- (l28) edge [bend left] (l27)
+		(l27) -- (l33);
+		\end{tikzpicture}
+	}
+	\resizebox{0.3\linewidth}{!}{	
+		\begin{tikzpicture}[node distance=2cm, dummy/.style={circle,fill=blue!20,draw}]
+		\pic {sendPublishNotifications={}};
+		
+		\path[draw=green, opacity=0.6, line width=4mm]
+		(l1) -- (l2a) -- (l2b) -- (l2) -- (l3a) -- (l3) -- (l5) -- (l7) edge [bend right=15] (l9) 
+		(l9) -- (l16) -- (l9-16-e) -- (l7)
+		(l7) -- (l21) -- (l27) -- (l28) edge [bend left] (l27)
+		(l27) -- (l33);
+		\end{tikzpicture}
+	}
+	\resizebox{0.3\linewidth}{!}{	
+		\begin{tikzpicture}[node distance=2cm, dummy/.style={circle,fill=blue!20,draw}]
+		\pic {sendPublishNotifications={}};
+		
+		\path[draw=green, opacity=0.6, line width=4mm]
+		(l1) -- (l2a) -- (l2b) -- (l2) -- (l3a) -- (l3) -- (l5) -- (l7) -- (l21) -- (l23) -- (l24) -- (l25) edge [bend right=75] (l23)
+		(l23) edge [bend left] (l21)
+		(l21) -- (l27) -- (l28) edge [bend left] (l27)
+		(l27) -- (l33);
+		\end{tikzpicture}
+	}
+	\resizebox{0.3\linewidth}{!}{	
+		\begin{tikzpicture}[node distance=2cm, dummy/.style={circle,fill=blue!20,draw}]
+		\pic {sendPublishNotifications={}};
+		
+		\path[draw=green, opacity=0.6, line width=4mm]
+		(l1) -- (l2a) -- (l2b) -- (l2) -- (l3a) -- (l3) -- (l5) -- (l7) -- (l21) -- (l23) -- (l24) -- (l24-e) edge [bend left] (l23)
+		(l23) edge [bend left] (l21)
+		(l21) -- (l27) -- (l28) edge [bend left] (l27)
+		(l27) -- (l33);
+		\end{tikzpicture}
+	}
+	\caption{Visualization of the six test cases to cover \texttt{send\_publish\_notifications}.}
+\end{figure}
