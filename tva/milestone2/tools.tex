@@ -61,7 +61,7 @@ During our first investigation of the tool, we noticed that something was off ab
 The last run was in %TODO
 even though code was pushed to the master branch since then.
 Additionally Landscape was still configured to run its checks against Python 2.x while EvaP already made the switch to Python 3.x.
-Thankfully a fix of the configuration gave a significant boost to the rating (\ref{fig:landscape_python3}).
+Thankfully a fix of the configuration gave a significant boost to the rating (\autoref{fig:landscape_python3}).
 
 \begin{figure}[h]
     \centering
@@ -70,13 +70,21 @@ Thankfully a fix of the configuration gave a significant boost to the rating (\r
     \label{fig:landscape_error}
 \end{figure} 
 
-As we checked out the erros found section, we noticed that one of the found errors actually might have an impact on the function \texttt{send\_publish\_notifications} that we tested earlier. 
+As we checked out the errors found section, we noticed that one of the found errors actually might have an impact on the function \texttt{send\_publish\_notifications} that we tested earlier. 
 Landscape notified that the method \texttt{send\_publish\_notifications\_to\_user} has a dangerous default value as an argument.
-This method is called by our function.
-%TODO Description why it's dangerous
-%TODO Thankfully no failure in the live system
-%TODO distinction between fault, error, failure
-%TODO Decsription of fix
+(\autoref{fig:landscape_error})
+In production, this method is called by our function, during testing we mocked it.
+
+In the problematic code, a developer decided to make the function's arguments optional.
+As both arguments are expected to be lists, he wanted the default argument to be empty lists.
+The expected behavior was, that when the function is called without the respective arguments, the missing arguments would be set to empty lists.
+Python however parses the definition of the function when initially parsing the file.
+This is also when the default arguments are evaluated, therefore instead of creating new empty lists as default parameters on each execution of the function, those lists are only created once.
+
+The found code problem is obviously a fault, but it does never become an error or failure in the current system, as the function neither adds values to passed lists, nor is it called more than once during one script execution.
+But if future usages of the function --- within EvaP or another project --- would change that, the fault could potentially become an error and failure.
+
+A possible fix for the fault is to set the default arguments to \texttt{None}, and to create empty lists inside the function's body, as can be seen in \texttt{send\_publish\_notifications}.
 
 \paragraph{PyCharm}
 %TODO 
