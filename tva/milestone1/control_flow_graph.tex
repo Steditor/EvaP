@@ -1,10 +1,13 @@
 \usetikzlibrary{arrows,automata}
 
 \subsubsection{Selected Control Flow Graph}
-We chose the function, because %TODO  
+We chose to test the function \texttt{send\_publish\_notifications} from \texttt{evaluation/tools.py}.
+As most of EvaP's functionality deals with data management, this is one of the few functions with a complex control flow graph.
+Its purpose is to send an email notification to participants and contributers of all course for which new evaluation results have been published.
+To achieve this, the function has to traverse all newly published resources, collect the involved users and merge the notifications per user in order to send each user at most one mail.
 
-During our research we found two promising tools for control flow graph creation. 
-The first tool is hosted open source on GitHub (\url{https://github.com/danielrandall/python-control-flow-graph}). 
+During our research we found two promising tools for automatic control flow graph creation. 
+The first tool is open source and hosted on GitHub (\url{https://github.com/danielrandall/python-control-flow-graph}). 
 Unfortunately, it is not documented and its execution lead to errors. 
 After a few tries, we estimated that fixing the tool would take more time than creating the control flow graph by hand.
 The second tool found was even more promising as it was a report of a master graduate from the university of Texas titled: 
@@ -12,24 +15,20 @@ The second tool found was even more promising as it was a report of a master gra
 by Jackson Lee Salling.
 His tool even visualized edge-pair and prime path coverage in control flow graphs.
 But unfortunately he did not respond to our request if we could use the tool for our project or if he had tips for published tools.
+Therefore, we created the control flow graph by hand.
 
+We experienced some difficulties with Python's code style, for example with the assignment of default values to missing parameters:
+\begin{lstlisting}[language=Python, breaklines]
+def send_publish_notifications(grade_document_courses=None, evaluation_results_courses=None):
+    grade_document_courses = grade_document_courses or []
+\end{lstlisting}
+This assignment of either the \texttt{grade\_document\_courses} or an empty list is dependent on the evaluation of \texttt{grade\_document\_courses}.
+Here are several statements hidden in one line, disguised by a lazy evaluation of a boolean disjunction.
 
-Therefore, we created the control flow graph by hand. We experienced some difficulties with Python's code style:
-\begin{itemize}
-    \item \texttt{def send\_publish\_notifications(
-        grade\_document\_courses=None, 
-        evaluation\_results\_courses=None):}
-    
-    
-    \item \texttt{grade\_document\_courses = grade\_document\_courses or []}
-    
-    This assignment of either the \texttt{grade\_document\_courses} or an empty list is dependent on the evaluation of \texttt{grade\_document\_courses}. Here are several statements hidden in one line.
-    \item 
-\end{itemize}
-\lstinputlisting[language=Python, breaklines, columns=flexible, float, floatplacement=t, label=lst:send_publish_notifications, caption=The control flow graph is based on this function.]{code/send_publish_notifications.py}
+\lstinputlisting[language=Python, breaklines, columns=flexible, float, label=lst:send_publish_notifications, caption=The control flow graph is based on this function.]{code/send_publish_notifications.py}
 
 \include{tikz_control_flow_graph}
-\begin{figure}[h!]
+\begin{figure}
 \resizebox{\linewidth}{!}{	
 	\begin{tikzpicture}[node distance=2cm, dummy/.style={circle,fill=blue!20,draw}]
 	\pic {sendPublishNotifications={}};
