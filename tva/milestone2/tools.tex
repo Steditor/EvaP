@@ -46,7 +46,7 @@ It did not report any errors for either \texttt{send\_publish\_notifications(..)
 \paragraph{Landscape}
 As described above the service Landscape is currently deployed in the development process. 
 The service advertises to find errors, possible problems and security issues.
-Every time the master branch of the repository is updated Landscape runs several code quality tools including pylint on the code. 
+Every time the master branch of the repository is updated Landscape runs several code quality tools including pylint on the whole codebase. 
 It accumulates the findings, creates an easy access to them.
 A rating based on the findings helps to get an overall idea about the current status.
 
@@ -82,6 +82,28 @@ This method is called by our function.
 %TODO 
 
 \paragraph{Experiences summarized}
-%TODO Fazit: Test support
+Out of the tested tools three were particularly useful.
+
+\begin{itemize}
+    \item Pylint is pretty verbose, but very helpful if you are working on adjusting one file to the style guide.
+    Its report is especially nice because it delivers statistics about the previous and the current run to compare the improvements due to the last code changes.
+    \item PyCharm is especially useful for developers, because its inspection leads to the source code itself.
+    Additionally PyCharm suggests fixes for its findings which enhances and accelerates the process quite a lot.
+    \item Landscape's advantage is its setup as a service. It allows everyone to get an overview over the code quality without installing a tool on their machine. Furthermore, its automatic run after every code change on the master allows comparison between two states.
+\end{itemize}
+
+It is unfortunate that a tool as PyChecker that has not been updated for a while and does not work for Python 3.x is still listed and even highly recommended.  
+While the tools pep8 and Pyflakes were not outstandingly useful for us they seem to serve their purpose.
+
+The tools' usefulness regarding testing differs as well:
+\begin{enumerate}
+    \item PyCharm is the most useful, because it is simultaneously the IDE
+    \item Landscape is helpful as it does not only locate possible erros, but suggest why a tester should be rethink the code or write a test 
+    \item pylint and pep8 are great, because a uniform code style helps new developers and testers to easily find into the project. 
+\end{enumerate}
+
+
+
+
 
 
