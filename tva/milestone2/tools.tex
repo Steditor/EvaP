@@ -21,8 +21,6 @@ The investigation of the file \texttt{tools.py} leads to a few warnings and refa
 %TODO Restliche Grafiken in den Anhang?
 
 
-\paragraph{PyCharm}
-
 \paragraph{Pychecker}
 Even though you still find some outdated recommendations this tool's peak seems to be over. 
 The last update was in 2013.
@@ -46,5 +44,44 @@ The tool is less intuitively to use as there is no report if no errors are found
 It did not report any errors for either \texttt{send\_publish\_notifications(..)} or \texttt{tools.py}
 
 \paragraph{Landscape}
-%TODO 79 -> 92 after python3 support and configuration update
-%TODO Error found description
+As described above the service Landscape is currently deployed in the development process. 
+The service advertises to find errors, possible problems and security issues.
+Every time the master branch of the repository is updated Landscape runs several code quality tools including pylint on the code. 
+It accumulates the findings, creates an easy access to them.
+A rating based on the findings helps to get an overall idea about the current status.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth, keepaspectratio]{graphics/landscape_python3}
+    \caption{Landscape's rating of the code after changing the configuration from Python 2.x to Python 3.x}
+    \label{fig:landscape_python3}
+\end{figure} 
+
+During our first investigation of the tool, we noticed that something was off about its configuration.
+The last run was in %TODO
+even though code was pushed to the master branch since then.
+Additionally Landscape was still configured to run its checks against Python 2.x while EvaP already made the switch to Python 3.x.
+Thankfully a fix of the configuration gave a significant boost to the rating (\ref{fig:landscape_python3}).
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth, keepaspectratio]{graphics/landscape_error}
+    \caption{Landscape's display of an error found with static analysis}
+    \label{fig:landscape_error}
+\end{figure} 
+
+As we checked out the erros found section, we noticed that one of the found errors actually might have an impact on the function \texttt{send\_publish\_notifications} that we tested earlier. 
+Landscape notified that the method \texttt{send\_publish\_notifications\_to\_user} has a dangerous default value as an argument.
+This method is called by our function.
+%TODO Description why it's dangerous
+%TODO Thankfully no failure in the live system
+%TODO distinction between fault, error, failure
+%TODO Decsription of fix
+
+\paragraph{PyCharm}
+%TODO 
+
+\paragraph{Experiences summarized}
+%TODO Fazit: Test support
+
+
