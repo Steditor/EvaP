@@ -55,7 +55,10 @@ determines a total of 101 necessary test paths to cover all prime paths.
 Even if we would remove all infeasible test paths from that list, the number of test paths would still be over-the-top.
 
 Hence, we decided to go for Specified Path Coverage to cover typical usages of the function and also some special cases that could lead to unexpected behavior.
-This lead to a test set of six test cases, that achieve both Node and Edge Coverage.
+This lead to a test set of six test cases, that achieve both Node and Edge Coverage. (\autoref{fig:cfg-test-cases})
+The first test case runs the function without arguments, hence testing the usage of the default arguments.
+Test cases two and three test, whether a course with results notifies its participants and contributers, whereas the fourth test case asserts, that a course without results won't do so.
+In the fifth and sixth test cases the functions behavior with uploaded grade documents is checked.
 
 \begin{figure}
 	\resizebox{0.3\linewidth}{!}{	
@@ -129,4 +132,10 @@ This lead to a test set of six test cases, that achieve both Node and Edge Cover
 		\end{tikzpicture}
 	}
 	\caption{Visualization of the six test cases to cover \texttt{send\_publish\_notifications}.}
+	\label{fig:cfg-test-cases}
 \end{figure}
+
+Even though the graph seemingly is covered by these test cases, in reality there still would be common usages of the function that remain uncovered by the test set.
+For example, if a student is participant in two published courses, he should not receive two notifications, but be notified about both changes in one mail.
+This shows, why Specified Path Coverage can easily lead to a ill-founded feeling of good testing coverage.
+We will handle some of the remaining special cases in \autoref{sec:input-coverage} where we discuss \nameref{sec:input-coverage}.
