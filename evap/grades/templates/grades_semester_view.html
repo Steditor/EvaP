@@ -54,11 +54,11 @@
                                         <span class="glyphicon glyphicon-file"></span> {{ num_final_grades }}
                                     {% elif course.gets_no_grade_documents %}
                                         <a href="{% url "grades:toggle_no_grades" semester.id course.id %}" {{ disable_if_archived }}>
-                                            <span class="glyphicon glyphicon-remove light-link" data-toggle="tooltip" data-placement="top" title="{% trans "Grade documents for this course will not be uploaded. Click to change." %}">
+                                            <span class="glyphicon glyphicon-remove light-link" data-toggle="tooltip" data-placement="top" title="{% trans "Grade documents for this course will not be uploaded. Click to change." %}"></span>
                                         </a>
                                     {% endif %}
                                 </td>
-                                <td class="text-right">
+                                <td class="text-right" style="min-width:72px">
                                     {% if not course.gets_no_grade_documents %}
                                         {% if num_final_grades == 0 %}
                                             <span data-toggle="tooltip" data-placement="top" title="{% trans "Confirm that final grades have been submitted but will not be uploaded" %}">

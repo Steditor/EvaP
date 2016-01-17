@@ -41,7 +41,7 @@ pep8 throws a few more errors about lines being too long, because the line lengt
 \paragraph{Pyflakes}
 Unlike Pylint and pep8 \emph{Pyflakes} does not check for violations of coding style but instead focuses on checking for errors.
 The tool is less intuitively to use as there is no report if no errors are found. 
-It did not report any errors for either \texttt{send\_publish\_notifications(..)} or \texttt{tools.py}
+It did not report any errors for neither \texttt{send\_publish\_notifications(..)} nor \texttt{tools.py}
 
 \paragraph{Landscape}
 As described above the service Landscape is currently deployed in the development process. 
@@ -68,9 +68,9 @@ Thankfully a fix of the configuration gave a significant boost to the rating (\a
     \includegraphics[width=\textwidth, keepaspectratio]{graphics/landscape_error}
     \caption{Landscape's display of an error found with static analysis}
     \label{fig:landscape_error}
-\end{figure} 
+\end{figure}
 
-As we checked out the errors found section, we noticed that one of the found errors actually might have an impact on the function \texttt{send\_publish\_notifications} that we tested earlier. 
+As we checked out the errors found section, we noticed that one of the found errors actually might have an impact on our test example function \texttt{send\_publish\_notifications}.
 Landscape notified that the method \texttt{send\_publish\_notifications\_to\_user} has a dangerous default value as an argument.
 (\autoref{fig:landscape_error})
 In production, this method is called by our function, during testing we mocked it.
@@ -87,7 +87,33 @@ But if future usages of the function --- within EvaP or another project --- woul
 A possible fix for the fault is to set the default arguments to \texttt{None}, and to create empty lists inside the function's body, as can be seen in \texttt{send\_publish\_notifications}.
 
 \paragraph{PyCharm}
-%TODO 
+The static analyses that can be conducted with PyCharm far outreach the possibilities of the other tested tools.
+Not only allows the IDE to search for possible faults in several types of source code (i.e. python, JavaScript, HTML, CSS, Django templates), but it also suggests automatic refactoring to solve these issues.
+
+All found code issues are classified by their severity into the categories `Server problem`, `Typo`, `Info`, `Weak Warning`, `Warning` and `Error`.
+One can both customize the type of issues and the severity of those that should be found by PyCharm.
+This is an important feature as --- whilst providing good inspections for a series of possible faults --- PyCharm tends to be pessimistic inaccurate.
+As PyCharm offers to find issues of around 400 types (a number that even can be increased with additional IDE plugins), the result list of the inspection is rather long and verbose when it is run with default settings.
+Especially concerning the English language checks, PyCharm heavily tries to match all occurring words with spelling rules.
+When it comes to variable names, this is often misleading and tends to produce loads of false positives. (\autoref{fig:pyCharmInspection-resultSummary})
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.4\textwidth]{graphics/pyCharmInspection-resultSummary}
+	\includegraphics[width=0.4\textwidth]{graphics/pyCharmInspection-resultSummaryClassification}
+	\caption{With the default configuration, PyCharm finds almost 9.5 thousand issues in the EvaP project. Most of them are false positives.}
+	\label{fig:pyCharmInspection-resultSummary}
+\end{figure}
+
+Included in the list of issue types are both style guide or code convention violations and possible bugs due to actual faults.
+For example, PyCharm checks for complete source code documentation, makes assumptions on the developer's intentions in contrast to possible typing errors and tries to apply data flow analysis to find uninitialized or unused variables.
+
+With the help of the PyCharm code inspection, 15 faults could easily be fixed by either automatic refactoring or simple manual changes.
+These fixes included false missing HTML tags and wrong tag nesting, dangerous python variable initialization and comparison as well as minor code convention violations.
+About a hundred additional code smells can be fixed with small effort.
+
+In addition to code inspections, PyCharm analyses the module dependencies and suggests to update them if the used version is outdated.
+This feature is roughly equivalent to the data provided by the online service \textit{Gemnasium}, that monitors the project's GitHub repository.
 
 \paragraph{Experiences summarized}
 Out of the tested tools three were particularly useful.
@@ -109,9 +135,3 @@ The tools' usefulness regarding testing differs as well:
     \item Landscape is helpful as it does not only locate possible erros, but suggest why a tester should be rethink the code or write a test 
     \item pylint and pep8 are great, because a uniform code style helps new developers and testers to easily find into the project. 
 \end{enumerate}
-
-
-
-
-
-

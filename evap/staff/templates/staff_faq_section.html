@@ -19,10 +19,12 @@
 
         <table id="question_table" class="table">
             <thead>
-                <th style="width: 10px;">&nbsp;</th>
-                <th>{% trans "Question/Answer (german)" %}</th>
-                <th>{% trans "Question/Answer (english)" %}</th>
-                <th>{% trans "Actions" %}</th>
+                <tr>
+                    <th style="width: 10px;">&nbsp;</th>
+                    <th>{% trans "Question/Answer (german)" %}</th>
+                    <th>{% trans "Question/Answer (english)" %}</th>
+                    <th>{% trans "Actions" %}</th>
+                </tr>
             </thead>
             <tbody>
             {% for form in formset %}

@@ -4,7 +4,7 @@ from django.db import transaction
 from django.utils.translation import ugettext as _
 from django.core.exceptions import ValidationError
 
-from evap.evaluation.models import Course, UserProfile, Degree
+from evap.evaluation.models import Course, UserProfile, Degree, Contribution
 from evap.evaluation.tools import is_external_email
 
 import xlrd
@@ -78,7 +78,7 @@ class CourseData(CommonEqualityMixin):
                         semester=semester)
         course.save()
         responsible_dbobj = UserProfile.objects.get(email=self.responsible_email)
-        course.contributions.create(contributor=responsible_dbobj, course=course, responsible=True, can_edit=True)
+        course.contributions.create(contributor=responsible_dbobj, course=course, responsible=True, can_edit=True, comment_visibility=Contribution.ALL_COMMENTS)
         for degree_name in self.degree_names:
             course.degrees.add(Degree.objects.get(name_de=degree_name))
 
@@ -176,7 +176,7 @@ class ExcelImporter(object):
             try:
                 user = UserProfile.objects.get(username=user_data.username)
                 if (user.email != user_data.email
-                        or (user.title != None and user.title != user_data.title)
+                        or (user.title is not None and user.title != user_data.title)
                         or user.first_name != user_data.first_name
                         or user.last_name != user_data.last_name):
                     self.warnings.append(_("The existing user would be overwritten with the following data:") +

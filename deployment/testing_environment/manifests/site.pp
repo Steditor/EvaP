@@ -41,6 +41,7 @@ node default {
         password_hash  => postgresql_password('evap', 'evap'),
         createdb       => true
     } -> postgresql::server::db { 'evap':
+        owner          => 'evap',
         user           => 'evap',
         password       => ''
     } -> package { 'libapache2-mod-wsgi-py3':
@@ -57,7 +58,9 @@ node default {
 
     # apache environment
     class { 'apache':
-        default_vhost => false
+        default_vhost => false,
+        user          => 'vagrant',
+        group         => 'vagrant',
     } ->
     exec {"fix apache's locale":
         provider => shell,
