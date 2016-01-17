@@ -275,8 +275,8 @@ class UnitTests(TestCase):
         self.assertFalse(contributor.can_staff_delete)
 
     def test_deleting_last_modified_user_does_not_delete_course(self):
-        user = mommy.make(UserProfile);
-        course = mommy.make(Course, last_modified_user=user);
+        user = mommy.make(UserProfile)
+        course = mommy.make(Course, last_modified_user=user)
         user.delete()
         self.assertTrue(Course.objects.filter(pk=course.pk).exists())
 

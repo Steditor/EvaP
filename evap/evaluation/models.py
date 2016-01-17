@@ -554,7 +554,7 @@ class Contribution(models.Model):
 
     @property
     def is_general(self):
-        return self.contributor == None
+        return self.contributor is None
 
 
 class Question(models.Model, metaclass=LocalizeModelBase):
@@ -825,7 +825,7 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
             return self.username
 
     def __str__(self):
-        return self.full_name;
+        return self.full_name
 
     @property
     def is_active(self):
@@ -1027,7 +1027,10 @@ class EmailTemplate(models.Model):
         cls.__send_to_user(user, template, subject_params, body_params, cc=False)
 
     @classmethod
-    def send_publish_notifications_to_user(cls, user, grade_document_courses=[], evaluation_results_courses=[]):
+    def send_publish_notifications_to_user(cls, user, grade_document_courses=None, evaluation_results_courses=None):
+        grade_document_courses = grade_document_courses or []
+        evaluation_results_courses = evaluation_results_courses or []
+
         template = cls.objects.get(name=cls.PUBLISHING_NOTICE)
 
         grade_documents_exist = len(grade_document_courses) > 0
