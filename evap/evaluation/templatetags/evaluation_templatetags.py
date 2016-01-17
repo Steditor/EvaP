@@ -12,8 +12,8 @@ def include_sortable_form_js():
     return dict()
 
 @register.inclusion_tag("progress_bar.html")
-def include_progress_bar(done, total, large=False):
-    return dict(done=done, total=total, large=large)
+def include_progress_bar(done, total, icon="", large=False):
+    return dict(done=done, total=total, icon=icon, large=large)
 
 @register.inclusion_tag("result_bar.html")
 def include_result_bar(result, show_grades, questionnaire_warning=False):
@@ -28,5 +28,5 @@ def include_comment_visibility_buttons(form):
     return dict(form=form)
 
 @register.inclusion_tag("choice_button.html")
-def include_choice_button(formelement, choice, enabled, tooltip):
-    return dict(formelement=formelement, choice=choice, enabled=enabled, tooltip=tooltip)
+def include_choice_button(formelement, choice, tooltip):
+    return dict(formelement=formelement, choice=choice, tooltip=tooltip)

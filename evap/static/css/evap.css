@@ -60,7 +60,7 @@ table#question_table textarea {
     resize: vertical;
 }
 
-ul.inputs-list {
+ul.inputs-list, .exportsheet ul {
     list-style-type: none;
     padding-left: 0px;
 }
@@ -428,6 +428,10 @@ Side notes for calling out things
     text-align: left;
     float: right;
     width: 36px;
+}
+
+.multi-progress-bar .evap-progress-bar-container {
+    padding-bottom: 5px;
 }
 
 .deactivate {
