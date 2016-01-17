@@ -817,6 +817,42 @@ class URLTests(WebTest):
 
         self.get_assert_403("/student/vote/5", user="lazy.student")
 
+    def test_comment_publishing(self):
+        """
+            Classifies a comment as published (private, unpublished) and checks, whether the model reflects this
+            decision.
+        """
+        course_id = 5
+        comment_id = 1
+        answer = TextAnswer.objects.get(pk=comment_id)
+        self.assertEqual(answer.state, TextAnswer.NOT_REVIEWED)
+
+        c = Client()
+        self.assertTrue(c.login(username='evap', password='evap'))
+
+        response = c.post(reverse('staff:course_comments_update_publish'),
+                         {"id": comment_id, "action": 'publish', "course_id": course_id})
+        self.assertEqual(response.status_code, 200)
+        answer = TextAnswer.objects.get(pk=comment_id)
+        self.assertEqual(answer.state, TextAnswer.PUBLISHED)
+
+        response = c.post(reverse('staff:course_comments_update_publish'),
+                         {"id": comment_id, "action": 'make_private', "course_id": course_id})
+        self.assertEqual(response.status_code, 200)
+        answer = TextAnswer.objects.get(pk=comment_id)
+        self.assertEqual(answer.state, TextAnswer.PRIVATE)
+
+        response = c.post(reverse('staff:course_comments_update_publish'),
+                         {"id": comment_id, "action": 'hide', "course_id": course_id})
+        self.assertEqual(response.status_code, 200)
+        answer = TextAnswer.objects.get(pk=comment_id)
+        self.assertEqual(answer.state, TextAnswer.HIDDEN)
+
+        response = c.post(reverse('staff:course_comments_update_publish'),
+                         {"id": comment_id, "action": 'unreview', "course_id": course_id})
+        self.assertEqual(response.status_code, 200)
+        answer = TextAnswer.objects.get(pk=comment_id)
+        self.assertEqual(answer.state, TextAnswer.NOT_REVIEWED)
 
 class CourseFormTests(TestCase):
 
