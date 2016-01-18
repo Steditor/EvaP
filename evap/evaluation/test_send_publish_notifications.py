@@ -22,14 +22,19 @@ class PublishNotificationTests(TestCase):
         can_publish_grades.return_value = True
 
         student = mommy.make(UserProfile, email="student@student.hpi.de")
-        course = mommy.make(Course, participants=[student], state="published")
-        general_contribution = Contribution(course=course, contributor=None)
+        course1 = mommy.make(Course, participants=[student], state="published")
+        course2 = mommy.make(Course, participants=[student], state="published")
+        general_contribution = Contribution(course=course1, contributor=None)
+        general_contribution.save()
+        general_contribution = Contribution(course=course2, contributor=None)
         general_contribution.save()
         contributor = mommy.make(UserProfile, email="contributor@hpi.de")
-        contribution = Contribution(course=course, contributor=contributor)
+        contribution = Contribution(course=course1, contributor=contributor)
+        contribution.save()
+        contribution = Contribution(course=course2, contributor=contributor)
         contribution.save()
 
-        send_publish_notifications(evaluation_results_courses = [course])
+        send_publish_notifications(evaluation_results_courses = [course1, course2])
         self.assertEqual(mockEmailTemplate.send_publish_notifications_to_user.call_count, 2)
 
     @patch('evap.evaluation.models.Course.can_publish_grades', new_callable=PropertyMock)
