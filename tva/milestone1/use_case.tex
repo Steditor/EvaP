@@ -17,7 +17,7 @@ The activity diagram (Graphic \ref{fig:activity-diagram}) used to explore scenar
         Use Case Name                      
             & Review Comments       \\ \hline 
         Summary                           
-            & Student representatives review comments for violation comment rules before its publishing                \\ \hline
+            & Student representatives review comments for violation of comment rules before publishing course results                \\ \hline
         Actor 
             & Student representatives (FSR)         \\ \hline
         Precondition          
@@ -52,7 +52,7 @@ The activity diagram (Graphic \ref{fig:activity-diagram}) used to explore scenar
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth, keepaspectratio]{graphics/use-case}
-    \caption{Activity diagram of the use case \emph{Review Comments}}
+    \caption{Activity diagram of the use case \emph{Review Comments}} %TODO state names
     \label{fig:activity-diagram}
 \end{figure}
 
@@ -105,7 +105,7 @@ It is in man's nature to love stories.
 There is no unit test for the actual code that offers the three marking options to the student representatives while reviewing comments.
 The source code lies in \texttt{evap/staff/views.py} in the function \texttt{course\_comments\_update\_publish()}.
 But following the use case we added a test, that checked if a marking is saved correctly in the model in \texttt{evap/staff/tests.py}.
-There are alreay tests that check if a comment marked as private is not visible to an unauthorized result viewer in \texttt{evap/results/tests.py}.
+There are already tests that check if a comment marked as private is not visible to an unauthorized result viewer in \texttt{evap/results/tests.py}.
 
 Even though it would be pleasant to have a test case covering the offering of the three options and the marking, the more important part of this use case, the decision, can not be tested.
 As the activity diagram shows a critical part is the decision, if a comment is to be marked as \emph{publishing: yes}, \emph{publishing: no} or \emph{publishing: private}.

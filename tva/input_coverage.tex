@@ -1,0 +1,26 @@
+Whilst testing the function \texttt{send\_publish\_notifications} we experienced a great difference between formal graph coverage criteria and actual sensible test cases.
+A more proper way to evaluate the readiness of this function concerning the test coverage would therefore be to assess its ability to deal with common input data correctly.
+
+One kind of input we had not yet tested in \autoref{sec:graph-coverage}, was if the system behaves reasonable if a participant or contributer was part of two courses which are published.
+In this case, the system nonetheless should only send one notification message per participant and contributer, and not one message per participation and contribution.
+For this specific case, we were able to simply extend one of our six test cases to publish two courses with common participants and contributers whilst keeping the expected number of sent messages the same.
+
+As this still is a very manual way of determining which kind of input is produced, the EvaP developers integrated a way to use anonymized real-world data for testing.
+The anonymization process in \texttt{evap/evaluation/management/commands/anonymize.py} involves complete exchange of names and minor shuffling of course data.
+This data could then be used to perform input coverage testing, as it quite precisely models the possible inputs.
+An obvious problem occurs, if --- despite this data containing years of real-life interactions with the system --- a unprecedented input data constellation forms.
+Even though this is unlikely, this test input data would still not guarantee correctness of the function under test.
+As the software is in use at the HPI, one can however assume, that as soon as such constellation occurs and an failure is produced, this incident will be reported by the involved students.
+
+Currently there is no implementation of a test that actually uses this input data, as this involves a great amount of additional manual preparation and specification of expected outputs.
+
+Another approach to increase the conclusiveness of our test set would be to run the same test set on modified code and make sure, all mutants are killed.
+
+Unfortunately, currently there seems to be no tool that supports automatic mutation testing on a Django project.
+The most promising application `mutpy`\footnote{\url{https://bitbucket.org/khalas/mutpy}} brings this testing technique to python 3, but crashes when run on projects depending on the Django library.
+
+Therefore we performed manual mutation testing and applied changes to our function under test.
+These changes included alterations of boolean expressions in conditions and changes to the foreach-loops, as well as commenting out code.
+All mutations that did not produce syntax- and therefore runtime errors were successfully killed by our test set which suggests, that it is able to distinguish most false behavior from expected behavior.
+As there was no documentation on the expected behavior and the function's code was the template for the written tests, this is not a big surprise, but merely indicates, that our test code is correct.
+However, the test set can be valuable once the code tested changes, as it then can help to identify changing behavior as well.

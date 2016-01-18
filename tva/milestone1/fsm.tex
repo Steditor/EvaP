@@ -1,7 +1,7 @@
 \subsubsection{Finite State Machine of Course States in the Evaluation Process}
 We used two methods to investigate the available artifact the FSM describing the states of courses in the evaluation process.
 
-First we executed the system on our machines.
+Firstly we executed the system on our machines.
 We used test data to observe and test:
 \begin{itemize}
     \item if every state of a course exists in the system
@@ -38,7 +38,7 @@ Furthermore we found missing states and annotations (Figure \ref{fig:new-states}
     \label{fig:new-states}
 \end{figure}
 
-Second, we were able to compare the FSM directly with the implementation found in \texttt{evap/evaluation/models.py} (Excerpt shown in Listing \ref{lst:states}).
+Secondly, we were able to compare the FSM directly with the implementation found in \texttt{evap/evaluation/models.py} (Excerpt shown in \autoref{lst:states}).
 A direct comparison is easy as there is a fsm package for the used webframework Django that was used to implement the FSM.
 
 \lstinputlisting[language=Python, breaklines, columns=flexible, float, label=lst:states, caption=Excerpt of the implementation of course states.]{code/states.py}

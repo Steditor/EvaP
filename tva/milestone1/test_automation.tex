@@ -16,7 +16,7 @@ Travis is a web service that automatically tests the code of each pull request s
 By these means it is enforced, that all existing tests are run at least once before code changes are merged into the production source code.
 
 \paragraph{PyCharm integration}
-For local development we decided to code and test with PyCharm, a professional IDE for python, that also claims to support Django and Vagrant out of the box.
+For local development we decided to code and test with PyCharm\footnote{\url{https://www.jetbrains.com/pycharm/}}, a professional IDE for python, that also claims to support Django and Vagrant out of the box.
 Since the recently published release of PyCharm version 5, this support almost covers all configuration issues of remote development, only the auto-configuration of remote access via ssh still is buggy and only sometimes runs out of the box.
 Whilst previous versions did not configure the path mapping to the virtual execution environment correctly, the developer now only has to run the automatic project configuration of PyCharm for Django Vagrant projects to be able to execute tests.
 The test integration then provides an intuitive graphical overview of the status of all test cases, and can even be configured to rerun automatically on code changes.
