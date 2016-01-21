@@ -1,7 +1,6 @@
-\subsection{Tools for Automatic Static Analysis}
 All tools were run on the function \texttt{send\_publish\_notifications(..)} and on the file \texttt{tools.py}.
 
-\subsubsection{Pylint}
+\subsection{Pylint}
 The Python quality checker \emph{Pylint} is a tool to help with coding standard as recommended by PEP 8, error detection and refactoring.
 Pylint message categories:
 \begin{itemize}
@@ -17,16 +16,16 @@ Pylint message categories:
     \caption{Pylint messages for \texttt{send\_publish\_notifications(..)}}
     \label{fig:pylint}
 \end{figure} 
-As expected after our testing Pylint found mostly violated coding conventions in \texttt{send\_publish\_notifications(..)} (\ref{fig:pylint}).
+As expected after our testing Pylint mostly found violations of coding conventions in \texttt{send\_publish\_notifications(..)} (\autoref{fig:pylint}).
 The investigation of the file \texttt{tools.py} leads to a few warnings and refactoring hints that we will discuss with the developers on the next occasion.
 
-\subsubsection{Pychecker}
+\subsection{Pychecker}
 Even though you still find some outdated recommendations this tool's peak seems to be over. 
 The last update was in 2013.
 It is written for Python 2.x and has never been ported to Python 3.x.
 Since the installation process requires Python 2.x while we work with Python 3.x in EvaP we will drop our investigation with this tool.
 
-\subsubsection{pep8}
+\subsection{pep8}
 The Python style guide checker \emph{pep8} checks code against some of the style conventions in PEP 8.
 It differentiates between errors and warnings.
 \begin{figure}[h]
@@ -37,12 +36,12 @@ It differentiates between errors and warnings.
 \end{figure} 
 pep8 throws a few more errors about lines being too long, because the line length was set to 100 instead of 80 characters in Pylint.
 
-\subsubsection{Pyflakes}
+\subsection{Pyflakes}
 Unlike Pylint and pep8 \emph{Pyflakes} does not check for violations of coding style but instead focuses on checking for errors.
 The tool is less intuitively to use as there is no report if no errors are found. 
-It did not report any errors for neither \texttt{send\_publish\_notifications(..)} nor \texttt{tools.py}
+It did not report any errors for neither \texttt{send\_publish\_notifications} nor \texttt{tools.py}
 
-\subsubsection{Landscape}
+\subsection{Landscape}
 As described above the service Landscape is currently deployed in the development process. 
 The service advertises to find errors, possible problems and security issues.
 Every time the master branch of the repository is updated Landscape runs several code quality tools including pylint on the whole codebase. 
@@ -83,7 +82,7 @@ But if future usages of the function --- within EvaP or another project --- woul
 
 A possible fix for the fault is to set the default arguments to \texttt{None}, and to create empty lists inside the function's body, as can be seen in \texttt{send\_publish\_notifications}.
 
-\subsubsection{PyCharm}
+\subsection{PyCharm}
 The static analyses that can be conducted with PyCharm far outreach the possibilities of the other tested tools.
 Not only allows the IDE to search for possible faults in several types of source code (i.e. Python, JavaScript, HTML, CSS, Django templates), but it also suggests automatic refactoring to solve these issues.
 

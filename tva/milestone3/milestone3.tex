@@ -15,7 +15,7 @@ As these tools consequently stick to pessimistic inaccuracy for some properties,
 If no errors are reported, one can be sure that concerning this error type the code is bug-free.
 Most times, however, one has to manually work through a list of false positives beforehand.
 
-\subsubsection{Verification on EvaP}
+\subsection{Verification on EvaP}
 
 For our project specifically we were not able to extend the verification process to more than the already discussed analysis.
 This is due to three reasons:
@@ -26,7 +26,7 @@ Whilst this might be a hint that the current software architecture could be impr
 This is aggravated by the fact, that most verification tools only work on primitive data types.
 Thirdly, EvaP suffers from the problems of Python as discussed above.
 
-\subsubsection{Python Explorer with Z3}
+\subsection{Python Explorer with Z3}
 
 Even though Python is an unaccommodating ground for proofs, verification of dynamic programming language is a current and important topic.
 For Python specifically we have found PyExZ3\footnote{\url{https://github.com/thomasjball/PyExZ3}} --- a verification tool that tries to perform symbolic execution on Python code with the help of the Z3 theorem prover\footnote{\url{http://z3.codeplex.com/}}.
@@ -44,7 +44,7 @@ This shows, that even a tiny code fragment can be to complex to be properly veri
 PyExZ3 was able to find all paths through a modified version of the script, that shares the same branching structure, but only uses integrals. (\autoref{lst:mix2})
 The additional function \texttt{expected\_result\_set} helps PyExZ3 to determine, whether it found all possible execution paths. (\autoref{pic:pyexz3})
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\includegraphics{graphics/PyExZ3-mix2}
 	\caption{PyExZ3 produces possible input data for test cases.}

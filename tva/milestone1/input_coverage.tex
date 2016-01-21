@@ -17,7 +17,7 @@ Currently there is no implementation of a test that actually uses this input dat
 Another approach to increase the conclusiveness of our test set would be to run the same test set on modified code and make sure, all mutants are killed.
 
 Unfortunately, currently there seems to be no tool that supports automatic mutation testing on a Django project.
-The most promising application `mutpy`\footnote{\url{https://bitbucket.org/khalas/mutpy}} brings this testing technique to python 3, but crashes when run on projects depending on the Django library.
+The most promising application `mutpy`\footnote{\url{https://bitbucket.org/khalas/mutpy}} brings this testing technique to Python 3, but crashes when run on projects depending on the Django library.
 
 Therefore we performed manual mutation testing and applied changes to our function under test.
 These changes included alterations of boolean expressions in conditions and changes to the foreach-loops, as well as commenting out code.

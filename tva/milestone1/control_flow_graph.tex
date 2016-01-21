@@ -139,3 +139,7 @@ Even though the graph seemingly is covered by these test cases, in reality there
 For example, if a student is participant in two published courses, he should not receive two notifications, but be notified about both changes in one mail.
 This shows, why Specified Path Coverage can easily lead to a ill-founded feeling of good testing coverage.
 We will handle some of the remaining special cases in \autoref{sec:input-coverage} where we discuss \nameref{sec:input-coverage}.
+
+Additionally one has to keep in mind, that in order to test the given function we had to mock both 3rd-Party interfaces (in our case the Django function to send emails) and the input data structures.
+The frameworks used in EvaP allowed us to do this without much effort.
+However, this approach includes the risk of building input data objects that are inconsistent with the structure of data that the function has to work with in production.

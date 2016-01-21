@@ -1,8 +1,8 @@
 \subsubsection{Finite State Machine of Course States in the Evaluation Process}
 We used two methods to investigate the available artifact the FSM describing the states of courses in the evaluation process.
-
 Firstly we executed the system on our machines.
 We used test data to observe and test:
+
 \begin{itemize}
     \item if every state of a course exists in the system
     \item if every transition exists as well as how and by whom the transition is initiated
@@ -10,10 +10,9 @@ We used test data to observe and test:
     \item if transitions are possible that are not represented in the FSM
 \end{itemize} 
 
-We found that some names of states differ between the Final State Machine and the system (Table \ref{tab:state-names}).
-\begin{table}[]
+We found that some names of states differ between the Final State Machine and the system (\autoref{tab:state-names}).
+\begin{table}[h]
     \centering
-    \label{tab:state-names}
     \begin{tabular}{|l|l|}
         \hline
         FSM name                      & system name       \\ \hline \hline
@@ -27,6 +26,7 @@ We found that some names of states differ between the Final State Machine and th
         published                     & published         \\ \hline
     \end{tabular}
     \caption{Comparing state names in FSM with state names in system}
+    \label{tab:state-names}
 \end{table}
 
 Furthermore we found missing states and annotations (Figure \ref{fig:new-states}).
