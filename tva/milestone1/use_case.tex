@@ -105,7 +105,7 @@ It is in man's nature to love stories.
 There is no unit test for the actual code that offers the three marking options to the student representatives while reviewing comments.
 The source code lies in \texttt{evap/staff/views.py} in the function \texttt{course\_comments\_update\_publish()}.
 But following the use case we added a test, that checked if a marking is saved correctly in the model in \texttt{evap/staff/tests.py}.
-There are already tests that check if a comment marked as private is not visible to an unauthorized result viewer in \texttt{evap/results/tests.py}.
+There are already tests that check whether a comment marked as private is visible to an unauthorized result viewer in \texttt{evap/results/tests.py}.
 
 Even though it would be pleasant to have a test case covering the offering of the three options and the marking, the more important part of this use case, the decision, can not be tested.
 As the activity diagram shows a critical part is the decision, if a comment is to be marked as \emph{publishing: yes}, \emph{publishing: no} or \emph{publishing: private}.
@@ -118,5 +118,5 @@ The default decision could be to publish comments as most comments are published
 Based on wording it could suggest to not publish comments containing swearwords.
 Such a system could not only be used to help with the decision but also with checking decisions made.
 It could highlight comments marked different from the suggestions.
-Such a system would allow some tests regarding the decision-
+Such a system would allow some tests regarding the presented use case.
 %TODO so important, but no test case - very sad, much bad
