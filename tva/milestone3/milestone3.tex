@@ -24,12 +24,12 @@ All three fields are heavily supported by the Django framework. Therefore, they 
 Secondly, even small methods usually rely on huge data models.
 Whilst this might be a hint that the current software architecture could be improved, as dependencies of small modules are too broad, it still leaves us with the problem of teaching a verification tool the very data structure.
 This is aggravated by the fact, that most verification tools only work on primitive data types.
-Thirdly, EvaP suffers from the problems of python as discussed above.
+Thirdly, EvaP suffers from the problems of Python as discussed above.
 
 \subsubsection{Python Explorer with Z3}
 
-Even though python is an unaccommodating ground for proofs, verification of dynamic programming language is a current and important topic.
-For python specifically we have found PyExZ3\footnote{\url{https://github.com/thomasjball/PyExZ3}} --- a verification tool that tries to perform symbolic execution on python code with the help of the Z3 theorem prover\footnote{\url{http://z3.codeplex.com/}}.
+Even though Python is an unaccommodating ground for proofs, verification of dynamic programming language is a current and important topic.
+For Python specifically we have found PyExZ3\footnote{\url{https://github.com/thomasjball/PyExZ3}} --- a verification tool that tries to perform symbolic execution on Python code with the help of the Z3 theorem prover\footnote{\url{http://z3.codeplex.com/}}.
 As result of a symbolic execution, the tool aims to supply a tester with a set of input data, that covers all possible execution paths of the function under test.
 
 We tried to apply the Python Explorer on a small, side-effect free function of EvaP, that is used to interpolate numeric values. (\autoref{lst:mix})
@@ -37,9 +37,9 @@ We tried to apply the Python Explorer on a small, side-effect free function of E
 Unfortunately, PyExZ3 cannot detect \texttt{None}-values, neither can it run symbolic execution with floating point values.
 This shows, that even a tiny code fragment can be to complex to be properly verified with current tools.
 
-\lstinputlisting[language=python, breaklines, columns=flexible, float, label=lst:mix, caption=The mix function from \texttt{evaluation/tools.py} that interpolates between two numeric values.]{code/mix.py}
+\lstinputlisting[language=Python, breaklines, columns=flexible, float, label=lst:mix, caption=The mix function from \texttt{evaluation/tools.py} that interpolates between two numeric values.]{code/mix.py}
 
 PyExZ3 was able to find all paths through a modified version of the script, that shares the same branching structure, but only uses integrals. (\autoref{lst:mix2})
 The additional function \texttt{expected\_result\_set} helps PyExZ3 to determine, whether it found all possible execution paths.
 
-\lstinputlisting[language=python, breaklines, columns=flexible, float, label=lst:mix2, caption=The modified function for verification with the structure of mix.]{code/mix2.py}
+\lstinputlisting[language=Python, breaklines, columns=flexible, float, label=lst:mix2, caption=The modified function for verification with the structure of mix.]{code/mix2.py}

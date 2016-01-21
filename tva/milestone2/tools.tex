@@ -7,7 +7,7 @@ Pylint message categories:
 \begin{itemize}
     \item (C) convention: programming standard violation
     \item (R) refactor: code smell
-    \item (W) warning: python specific problem
+    \item (W) warning: Python specific problem
     \item (E) error: likely bug
     \item (F) fatal: an error occurred preventing pylint from continuing the analysis
 \end{itemize}
@@ -55,14 +55,14 @@ A rating based on the findings helps to get an overall idea about the current st
     \centering
     \includegraphics[width=0.7\textwidth, keepaspectratio]{graphics/landscape_python3}
     \caption{Landscape's rating of the code after changing the configuration from Python 2.x to Python 3.x}
-    \label{fig:landscape_python3}
+    \label{fig:landscape_Python3}
 \end{figure} 
 
 During our first investigation of the tool, we noticed that something was off about its configuration.
 The last run was in %TODO
 even though code was pushed to the master branch since then.
 Additionally Landscape was still configured to run its checks against Python 2.x while EvaP already made the switch to Python 3.x.
-Thankfully a fix of the configuration gave a significant boost to the rating (\autoref{fig:landscape_python3}).
+Thankfully a fix of the configuration gave a significant boost to the rating (\autoref{fig:landscape_Python3}).
 
 \begin{figure}[h]
     \centering
@@ -89,7 +89,7 @@ A possible fix for the fault is to set the default arguments to \texttt{None}, a
 
 \subsubsection{PyCharm}
 The static analyses that can be conducted with PyCharm far outreach the possibilities of the other tested tools.
-Not only allows the IDE to search for possible faults in several types of source code (i.e. python, JavaScript, HTML, CSS, Django templates), but it also suggests automatic refactoring to solve these issues.
+Not only allows the IDE to search for possible faults in several types of source code (i.e. Python, JavaScript, HTML, CSS, Django templates), but it also suggests automatic refactoring to solve these issues.
 
 All found code issues are classified by their severity into the categories `Server problem`, `Typo`, `Info`, `Weak Warning`, `Warning` and `Error`.
 One can both customize the type of issues and the severity of those that should be found by PyCharm.
@@ -110,7 +110,7 @@ Included in the list of issue types are both style guide or code convention viol
 For example, PyCharm checks for complete source code documentation, makes assumptions on the developer's intentions in contrast to possible typing errors and tries to apply data flow analysis to find uninitialized or unused variables.
 
 With the help of the PyCharm code inspection, 15 faults could easily be fixed by either automatic refactoring or simple manual changes.
-These fixes included false missing HTML tags and wrong tag nesting, dangerous python variable initialization and comparison as well as minor code convention violations.
+These fixes included false missing HTML tags and wrong tag nesting, dangerous Python variable initialization and comparison as well as minor code convention violations.
 About a hundred additional code smells can be fixed with small effort.
 
 In addition to code inspections, PyCharm analyses the module dependencies and suggests to update them if the used version is outdated.
