@@ -11,8 +11,8 @@ As long as one tries to verify properties of side-effect free, short code scopes
 
 This, for example includes the availability of needed imports and the question whether a variable has been initialized or not.
 Such properties can be found using the already presented tools for code analysis.
-As these tools for some properties consequently stick to pessimistic inaccuracy, they can guarantee to find some faults if present.
-If no errors are reported, one can be sure that concerning this error type, the code is bug-free.
+As these tools consequently stick to pessimistic inaccuracy for some properties, they can guarantee to find some faults if present.
+If no errors are reported, one can be sure that concerning this error type the code is bug-free.
 Most times, however, one has to manually work through a list of false positives beforehand.
 
 \subsubsection{Verification on EvaP}
@@ -20,7 +20,7 @@ Most times, however, one has to manually work through a list of false positives 
 For our project specifically we were not able to extend the verification process to more than the already discussed analysis.
 This is due to three reasons:
 Firstly, EvaP consists mainly of code for request routing, data management and HTML output.
-All three fields are heavily supported by the Django framework and therefore are not within our scope to verify.
+All three fields are heavily supported by the Django framework. Therefore, they are not within our scope to verify.
 Secondly, even small methods usually rely on huge data models.
 Whilst this might be a hint that the current software architecture could be improved, as dependencies of small modules are too broad, it still leaves us with the problem of teaching a verification tool the very data structure.
 This is aggravated by the fact, that most verification tools only work on primitive data types.
