@@ -1,9 +1,9 @@
 \section{Milestone 3: Verification}
 
-\subsection{Verification on Python}
-
 Verification of a software artifact is difficult if not impossible for non-trivial properties.
 However, provided with certain limitations, a good tool can still be able to for example find infinite loops, detect dead locks or dangerous concurrent data modification.
+
+\subsection{Verification on Python}
 
 With Python being a dynamically typed programming language, the verification process gets even more problematic, as hardly any information on a variable used in the algorithm is static:
 Types and values can change, and due to \textit{duck typing}, an object can be interpreted as different types at the same time.
@@ -39,7 +39,14 @@ This shows, that even a tiny code fragment can be to complex to be properly veri
 
 \lstinputlisting[language=python, breaklines, columns=flexible, float, label=lst:mix, caption=The mix function from \texttt{evaluation/tools.py} that interpolates between two numeric values.]{code/mix.py}
 
-PyExZ3 was able to find all paths through a modified version of the script, that shares the same branching structure, but only uses integrals. (\autoref{lst:mix2})
-The additional function \texttt{expected\_result\_set} helps PyExZ3 to determine, whether it found all possible execution paths.
-
 \lstinputlisting[language=python, breaklines, columns=flexible, float, label=lst:mix2, caption=The modified function for verification with the structure of mix.]{code/mix2.py}
+
+PyExZ3 was able to find all paths through a modified version of the script, that shares the same branching structure, but only uses integrals. (\autoref{lst:mix2})
+The additional function \texttt{expected\_result\_set} helps PyExZ3 to determine, whether it found all possible execution paths. (\autoref{pic:pyexz3})
+
+\begin{figure}
+	\centering
+	\includegraphics{graphics/PyExZ3-mix2}
+	\caption{PyExZ3 produces possible input data for test cases.}
+	\label{pic:pyexz3}
+\end{figure}
