@@ -3,7 +3,7 @@
 \subsubsection{Selected Control Flow Graph}
 We chose to test the function \texttt{send\_publish\_notifications} from \texttt{evaluation/tools.py}.
 As most of EvaP's functionality deals with data management, this is one of the few functions with a complex control flow graph.
-Its purpose is to send an email notification to participants and contributers of all course for which new evaluation results have been published.
+Its purpose is to send an email notification to participants and contributers of all courses for which new evaluation results have been published.
 To achieve this, the function has to traverse all newly published resources, collect the involved users and merge the notifications per user in order to send each user at most one mail.
 
 During our research we found two promising tools for automatic control flow graph creation. 
